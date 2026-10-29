@@ -1,0 +1,23 @@
+name: Validate
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  server-json:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install "jsonschema[format]==4.23.0"
+      - name: Validate server.json against the MCP registry schema
+        run: python scripts/validate_server_json.py
+      - name: Check example configs are valid JSON
+        run: for f in examples/*.json; do python -m json.tool "$f" > /dev/null || exit 1; done

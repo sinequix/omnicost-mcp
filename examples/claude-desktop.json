@@ -1,0 +1,17 @@
+{
+    "mcpServers": {
+        "omnicost": {
+            "command": "npx",
+            "args": [
+                "-y",
+                "mcp-remote",
+                "https://omnicost.com/api/mcp",
+                "--header",
+                "Authorization:Bearer ${OMNICOST_API_KEY}"
+            ],
+            "env": {
+                "OMNICOST_API_KEY": "<your key>"
+            }
+        }
+    }
+}

@@ -1,0 +1,27 @@
+{
+  "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+  "name": "com.omnicost/catalog",
+  "title": "Omnicost",
+  "description": "Construction unit prices with source and date for Spain, the US and the EU. Search and item tools.",
+  "version": "1.0.0",
+  "websiteUrl": "https://omnicost.com",
+  "repository": {
+    "url": "https://github.com/sinequix/omnicost-mcp",
+    "source": "github"
+  },
+  "remotes": [
+    {
+      "type": "streamable-http",
+      "url": "https://omnicost.com/api/mcp",
+      "headers": [
+        {
+          "name": "Authorization",
+          "description": "Bearer token with your Omnicost organization API key",
+          "value": "Bearer {api_key}",
+          "isRequired": true,
+          "isSecret": true
+        }
+      ]
+    }
+  ]
+}
