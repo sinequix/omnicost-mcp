@@ -1,0 +1,21 @@
+<svg width="180" height="180" viewBox="0 0 72 72" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Omnicost">
+  <style>
+    @media (prefers-color-scheme: light) {
+      .bg { fill: #4F46E5; }
+      .mark { fill: #FFFFFF; }
+      .corner { fill: #F59E0B; }
+    }
+    @media (prefers-color-scheme: dark) {
+      .bg { fill: #6366F1; }
+      .mark { fill: #0A0A0A; }
+      .corner { fill: #FBBF24; }
+    }
+  </style>
+  <rect class="bg" width="72" height="72" rx="16"/>
+  <path class="corner" d="M72 29 L72 56 A16 16 0 0 1 56 72 L31 72 Z"/>
+  <path
+    class="mark"
+    fill-rule="evenodd"
+    d="M61.11 21.5 L36 7 L10.89 21.5 L10.89 50.5 L36 65 L61.11 50.5 L49.16 43.6 L36 51.2 L22.84 43.6 L22.84 28.4 L36 20.8 L49.16 28.4 Z"
+  />
+</svg>

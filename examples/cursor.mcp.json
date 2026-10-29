@@ -1,0 +1,10 @@
+{
+    "mcpServers": {
+        "omnicost": {
+            "url": "https://omnicost.com/api/mcp",
+            "headers": {
+                "Authorization": "Bearer ${env:OMNICOST_API_KEY}"
+            }
+        }
+    }
+}

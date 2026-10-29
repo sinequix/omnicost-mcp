@@ -1,0 +1,19 @@
+{
+    "inputs": [
+        {
+            "type": "promptString",
+            "id": "omnicost-key",
+            "description": "Omnicost API key",
+            "password": true
+        }
+    ],
+    "servers": {
+        "omnicost": {
+            "type": "http",
+            "url": "https://omnicost.com/api/mcp",
+            "headers": {
+                "Authorization": "Bearer ${input:omnicost-key}"
+            }
+        }
+    }
+}

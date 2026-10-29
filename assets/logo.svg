@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="72" height="72" viewBox="0 0 72 72" fill="none" role="img" aria-label="Omnicost">
+  <!-- Site palette: primary #4F46E5 · white C · accent #F59E0B; AIDesigner-aligned tip overlap -->
+  <rect width="72" height="72" rx="16" fill="#4F46E5"/>
+  <!-- Larger amber corner (diagonal ≈ x+y=102); C drawn after so tip sits on orange -->
+  <path fill="#F59E0B" d="M72 29 L72 56 A16 16 0 0 1 56 72 L31 72 Z"/>
+  <path
+    fill="#FFFFFF"
+    fill-rule="evenodd"
+    d="M61.11 21.5 L36 7 L10.89 21.5 L10.89 50.5 L36 65 L61.11 50.5 L49.16 43.6 L36 51.2 L22.84 43.6 L22.84 28.4 L36 20.8 L49.16 28.4 Z"
+  />
+</svg>
