@@ -2,8 +2,8 @@
   "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
   "name": "com.omnicost/catalog",
   "title": "Omnicost",
-  "description": "Construction unit prices with source and date for Spain, the US and the EU. Search and item tools.",
-  "version": "1.0.0",
+  "description": "Construction unit prices with source and date for Spain, the US and the EU. OAuth or API key.",
+  "version": "1.1.0",
   "websiteUrl": "https://omnicost.com",
   "repository": {
     "url": "https://github.com/sinequix/omnicost-mcp",
@@ -16,9 +16,9 @@
       "headers": [
         {
           "name": "Authorization",
-          "description": "Bearer token with your Omnicost organization API key",
+          "description": "Optional Bearer API key. Clients with MCP OAuth can sign in with an Omnicost account instead.",
           "value": "Bearer {api_key}",
-          "isRequired": true,
+          "isRequired": false,
           "isSecret": true
         }
       ]

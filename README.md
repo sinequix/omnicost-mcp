@@ -14,19 +14,31 @@ The server itself is hosted by Omnicost. There is nothing to install or run from
 | --- | --- |
 | Endpoint | `https://omnicost.com/api/mcp` |
 | Transport | Streamable HTTP |
-| Auth | `Authorization: Bearer <organization API key>` |
+| Auth | Sign in with your Omnicost account (OAuth 2.1 + PKCE), or `Authorization: Bearer <API key>` |
 | Registry name | `com.omnicost/catalog` |
 | Website | https://omnicost.com |
 
-## Get an API key
+## Connect with your Omnicost account
 
-To connect, create a free Omnicost workspace and generate an organization API key. The Free plan includes one.
+Claude, ChatGPT and Claude Code can connect by signing in. You need a free Omnicost account; no API key to copy.
+
+- **Claude (claude.ai and Claude Desktop):** Settings → Connectors → Add custom connector. Paste `https://omnicost.com/api/mcp` and click Connect.
+- **ChatGPT:** Settings → Apps & Connectors, turn on developer mode and create a connector with the URL `https://omnicost.com/api/mcp` and OAuth authentication.
+- **Claude Code:** `claude mcp add --transport http omnicost https://omnicost.com/api/mcp`, then run `/mcp` and pick `omnicost` to sign in.
+
+The client opens an Omnicost sign-in page. Sign in (or create an account), pick the workspace to connect and approve read-only catalog access. The connection uses that workspace's plan: Omnicost Pro limits on Pro, otherwise the free tier (200 requests a minute, 10,000 a month). Access tokens last 1 hour and refresh on their own for 30 days.
+
+Any other client that supports MCP authorization can do the same: the server answers `401` with `WWW-Authenticate: Bearer resource_metadata="https://omnicost.com/.well-known/oauth-protected-resource/api/mcp"`, and the authorization server supports dynamic client registration and Client ID Metadata Documents.
+
+## Connect with an API key
+
+For clients without OAuth, or for scripts:
 
 1. Sign up at https://omnicost.com/en and create your workspace.
 2. Open https://omnicost.com/dashboard/mcp and create an organization API key.
 3. Add it to your MCP client config as shown below.
 
-Requests to `/api/mcp` without a key get a `401` that asks for an organization API key from an Omnicost workspace.
+Without a key or a sign-in, `initialize`, `tools/list` and `ping` are free, and each `tools/call` costs $0.01 in USDC on Base via [x402](https://omnicost.com/.well-known/x402). Claude and ChatGPT get a `401` instead, which starts their sign-in.
 
 ## Tools
 
@@ -39,9 +51,9 @@ Requests to `/api/mcp` without a key get a `401` that asks for an organization A
 
 For useful results, query items priced in Spain, the US or the EU.
 
-## Client setup
+## Client setup with an API key
 
-Replace the placeholder with your organization API key. Keep the key out of version control.
+Replace the placeholder with your organization API key. Keep the key out of version control. Clients that support OAuth can skip the key; see above.
 
 ### Cursor
 
@@ -112,17 +124,18 @@ Claude Desktop talks to remote servers through [`mcp-remote`](https://www.npmjs.
 
 ### Any other client
 
-Point a client that supports streamable HTTP at `https://omnicost.com/api/mcp` and send the key as a Bearer token in the `Authorization` header.
+Point a client that supports streamable HTTP at `https://omnicost.com/api/mcp`. Either let it sign in with OAuth or send the key as a Bearer token in the `Authorization` header.
 
 ## Pricing
 
-The Free plan includes an organization API key for MCP. Omnicost Pro ($9/week, $29/month or $290/year) includes API and MCP access with 100,000 requests a month. See https://omnicost.com/en/pricing.
+A free account can connect by OAuth or with an organization API key. Omnicost Pro ($9/week, $29/month or $290/year) includes API and MCP access with 100,000 requests a month. See https://omnicost.com/en/pricing.
 
 ## More
 
 - REST API docs: https://omnicost.com/en/docs/api
 - Developer page: https://omnicost.com/en/developers
 - Server card: https://omnicost.com/.well-known/mcp.json
+- Auth for agents: https://omnicost.com/auth.md
 - Support: support@omnicost.com
 
 ## License
