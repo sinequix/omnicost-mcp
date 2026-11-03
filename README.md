@@ -28,7 +28,7 @@ Claude, ChatGPT and Claude Code can connect by signing in. You need a free Omnic
 
 The client opens an Omnicost sign-in page. Sign in (or create an account), pick the workspace to connect and approve read-only catalog access. The connection uses that workspace's plan: Omnicost Pro limits on Pro, otherwise the free tier (200 requests a minute, 10,000 a month). Access tokens last 1 hour and refresh on their own for 30 days.
 
-Any other client that supports MCP authorization can do the same: the server answers `401` with `WWW-Authenticate: Bearer resource_metadata="https://omnicost.com/.well-known/oauth-protected-resource/api/mcp"`, and the authorization server supports dynamic client registration and Client ID Metadata Documents.
+Any other client that supports MCP authorization can do the same: every request to `/api/mcp` without a key or token gets a `401` with `WWW-Authenticate: Bearer realm="omnicost", error="missing_token", resource_metadata="https://omnicost.com/.well-known/oauth-protected-resource"`, and the authorization server supports dynamic client registration and Client ID Metadata Documents.
 
 ## Connect with an API key
 
@@ -38,7 +38,9 @@ For clients without OAuth, or for scripts:
 2. Open https://omnicost.com/dashboard/mcp and create an organization API key.
 3. Add it to your MCP client config as shown below.
 
-Without a key or a sign-in, `initialize`, `tools/list` and `ping` are free, and each `tools/call` costs $0.01 in USDC on Base via [x402](https://omnicost.com/.well-known/x402). Claude and ChatGPT get a `401` instead, which starts their sign-in.
+## Pay per call without an account (x402)
+
+Agents that pay per call instead of signing in use a separate endpoint, `https://omnicost.com/api/mcp/x402`. There, `initialize`, `tools/list` and `ping` are free, and each `tools/call` costs $0.01 in USDC on Base via [x402](https://omnicost.com/.well-known/x402), charged only when the call succeeds. On `https://omnicost.com/api/mcp`, a request without a key or token gets the `401` that starts sign-in.
 
 ## Tools
 
